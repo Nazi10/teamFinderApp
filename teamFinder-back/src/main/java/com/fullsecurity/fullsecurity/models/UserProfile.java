@@ -1,5 +1,6 @@
 package com.fullsecurity.fullsecurity.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fullsecurity.fullsecurity.models.enumeration.TimeAvailability;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
@@ -9,7 +10,10 @@ import lombok.*;
 import org.hibernate.annotations.SQLRestriction;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 @AllArgsConstructor
@@ -51,15 +55,21 @@ public class UserProfile {
     private TimeAvailability timeAvailability;
 
     // id e userit te loguar
-    private Long userId;
+    private Long loggedInUser;
 
-    @OneToMany(mappedBy = "receiver")
-    private List<ViewerNotification> receivedNotifications;
+    //    @OneToMany(mappedBy = "receiver")
+//    private List<ViewerNotification> receivedNotifications;
+//
+//    @OneToMany(mappedBy = "sender", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private Set<FriendRequest> sentFriendRequests = new HashSet<>();
+//
+//    @OneToMany(mappedBy = "friend")
+//    private List<FriendsList> friendsLists;
 
-    @OneToMany(mappedBy = "receiver")
-    private List<FriendRequest> friendRequests;
-
-    @OneToMany(mappedBy = "friend")
-    private List<FriendsList> friendsLists;
+    @Override
+    public String toString() {
+        return String.format("UserProfile{id=%d, name='%s', email='%s', skills=[%s]}",
+                id, name, email, skills.stream().map(Skills::getName).collect(Collectors.joining(", ")));
+    }
 
 }

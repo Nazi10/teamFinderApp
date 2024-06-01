@@ -1,5 +1,6 @@
 package com.fullsecurity.fullsecurity.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,9 +28,11 @@ public class FriendRequest {
     private Boolean isAccepted;
 
     @ManyToOne
+    @JoinColumn(name = "sender_id", nullable = false)
     private UserProfile sender;
 
     @ManyToOne
+    @JoinColumn(name = "receiver_id", nullable = false)
     private UserProfile receiver;
 
     private LocalDateTime timestamp;

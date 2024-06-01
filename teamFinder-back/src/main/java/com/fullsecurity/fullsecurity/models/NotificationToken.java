@@ -7,31 +7,22 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.SQLRestriction;
 
-import java.time.LocalDateTime;
-
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Table(name = "viewer_notification")
+@Table(name = "notification_token")
 @SQLRestriction("status = true")
-public class ViewerNotification {
+public class NotificationToken {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    private UserProfile sender;
-
-    @ManyToOne
-    private UserProfile receiver;
-
-    private Boolean isRead;
-
-    private String message;
-
     private Boolean status;
 
-    private LocalDateTime timestamp;
+    private String token;
+
+    private Long loggedUser;
 }

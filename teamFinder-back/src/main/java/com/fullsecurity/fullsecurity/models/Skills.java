@@ -1,10 +1,7 @@
 package com.fullsecurity.fullsecurity.models;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.SQLRestriction;
 
 @Entity
@@ -20,5 +17,10 @@ public class Skills {
     private Long id;
 
     private String name;
+
+    @Override
+    public String toString() {
+        return String.format("Skills{id=%d, name='%s'}", id, name);
+    }
 
 }

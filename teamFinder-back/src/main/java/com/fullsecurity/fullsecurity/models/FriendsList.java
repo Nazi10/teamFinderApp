@@ -13,13 +13,15 @@ import org.hibernate.annotations.SQLRestriction;
 @Getter
 @Setter
 @Table(name = "friends_list")
-@SQLRestriction("status = true")
 public class FriendsList {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+
     @ManyToOne
     private UserProfile friend;
+
+    private Long loggedInUser;
 }
